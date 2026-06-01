@@ -21,10 +21,9 @@ export function DeadlineCell({ deadline }: { deadline: string | null }) {
   return (
     <span
       className={cn(
-        "font-medium",
-        status === "today" && "text-red-600",
-        status === "overdue" && "text-red-600",
-        status === "soon" && "text-yellow-600",
+        "font-medium rounded px-1.5 py-0.5",
+        (status === "today" || status === "overdue") && "text-red-600 bg-red-50",
+        status === "soon" && "text-yellow-600 bg-yellow-50",
       )}
     >
       {formatted}

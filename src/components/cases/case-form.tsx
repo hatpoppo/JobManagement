@@ -60,7 +60,7 @@ export function CaseForm({ defaultValues, onSubmit, onCancel }: CaseFormProps) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>フェーズ</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value ?? "new"}>
+              <Select onValueChange={field.onChange} value={field.value ?? "new"} items={PHASE_OPTIONS}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="フェーズを選択" />
