@@ -59,7 +59,7 @@ export function CasesTable({ initialCases }: { initialCases: Case[] }) {
               <TableHead>フェーズ</TableHead>
               <TableHead>期日</TableHead>
               <TableHead>担当者</TableHead>
-              <TableHead className="w-24"></TableHead>
+              <TableHead className="w-24 sticky right-0 bg-white border-l"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -76,7 +76,7 @@ export function CasesTable({ initialCases }: { initialCases: Case[] }) {
                   <TableCell><PhaseBadge phase={c.phase} /></TableCell>
                   <TableCell><DeadlineCell deadline={c.deadline} /></TableCell>
                   <TableCell>{c.assignee ?? "-"}</TableCell>
-                  <TableCell>
+                  <TableCell className="sticky right-0 bg-white border-l">
                     <div className="flex gap-1">
                       <Button size="sm" variant="ghost" onClick={() => handleEdit(c)}>編集</Button>
                       <Button size="sm" variant="ghost" className="text-destructive" onClick={() => handleDelete(c.id)}>削除</Button>
