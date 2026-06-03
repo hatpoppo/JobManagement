@@ -17,6 +17,14 @@ export function CasesTable({ initialCases }: { initialCases: Case[] }) {
   const [caseList, setCaseList] = useState<Case[]>(initialCases);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editTarget, setEditTarget] = useState<Case | undefined>(undefined);
+  const [expandedNames, setExpandedNames] = useState<Set<string>>(new Set());
+
+  const toggleName = (id: string) =>
+    setExpandedNames((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
 
   const handleAdd = () => {
     setEditTarget(undefined);
@@ -72,9 +80,11 @@ export function CasesTable({ initialCases }: { initialCases: Case[] }) {
             ) : (
               caseList.map((c) => (
                 <TableRow key={c.id}>
-                  <TableCell className="relative group font-medium">
-                    <span className="block w-28 sm:w-auto truncate">{c.name}</span>
-                    <span className="pointer-events-none absolute left-2 top-full z-50 hidden max-w-xs rounded bg-black/80 px-2 py-1 text-xs text-white group-hover:block">
+                  <TableCell className="font-medium">
+                    <span
+                      onClick={() => toggleName(c.id)}
+                      className={`block cursor-pointer sm:cursor-default sm:w-auto ${expandedNames.has(c.id) ? "whitespace-normal break-all" : "w-28 truncate"}`}
+                    >
                       {c.name}
                     </span>
                   </TableCell>
