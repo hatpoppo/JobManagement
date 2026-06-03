@@ -72,8 +72,11 @@ export function CasesTable({ initialCases }: { initialCases: Case[] }) {
             ) : (
               caseList.map((c) => (
                 <TableRow key={c.id}>
-                  <TableCell className="font-medium">
-                    <span className="block w-28 sm:w-auto truncate" title={c.name}>{c.name}</span>
+                  <TableCell className="relative group font-medium">
+                    <span className="block w-28 sm:w-auto truncate">{c.name}</span>
+                    <span className="pointer-events-none absolute left-2 top-full z-50 hidden max-w-xs rounded bg-black/80 px-2 py-1 text-xs text-white group-hover:block">
+                      {c.name}
+                    </span>
                   </TableCell>
                   <TableCell><PhaseBadge phase={c.phase} /></TableCell>
                   <TableCell><DeadlineCell deadline={c.deadline} /></TableCell>
