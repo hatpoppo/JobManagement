@@ -51,15 +51,15 @@ export function CasesTable({ initialCases }: { initialCases: Case[] }) {
         <Button onClick={handleAdd}>+ 案件を追加</Button>
       </div>
 
-      <div className="rounded-md border overflow-x-auto">
+      <div className="rounded-md border overflow-x-auto overflow-y-auto max-h-[calc(100vh-10rem)]">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>案件名</TableHead>
               <TableHead>フェーズ</TableHead>
               <TableHead>期日</TableHead>
-              <TableHead>担当者</TableHead>
-              <TableHead className="w-24 sticky right-0 bg-white border-l"></TableHead>
+              <TableHead className="hidden sm:table-cell">担当者</TableHead>
+              <TableHead className="w-24 sticky right-0 top-0 bg-white border-l z-20"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -72,10 +72,12 @@ export function CasesTable({ initialCases }: { initialCases: Case[] }) {
             ) : (
               caseList.map((c) => (
                 <TableRow key={c.id}>
-                  <TableCell className="font-medium">{c.name}</TableCell>
+                  <TableCell className="font-medium">
+                    <span className="block w-28 sm:w-auto truncate" title={c.name}>{c.name}</span>
+                  </TableCell>
                   <TableCell><PhaseBadge phase={c.phase} /></TableCell>
                   <TableCell><DeadlineCell deadline={c.deadline} /></TableCell>
-                  <TableCell>{c.assignee ?? "-"}</TableCell>
+                  <TableCell className="hidden sm:table-cell">{c.assignee ?? "-"}</TableCell>
                   <TableCell className="sticky right-0 bg-white border-l">
                     <div className="flex gap-1">
                       <Button size="sm" variant="ghost" onClick={() => handleEdit(c)}>編集</Button>
